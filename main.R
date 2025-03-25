@@ -12,7 +12,7 @@ data$HeartDisease <- as.factor(data$HeartDisease) #target
 
 summary(data)
 
-#Splitting data into test and train
+# splitting data into test and train
 library(caret)
 
 set.seed(467)
@@ -24,6 +24,7 @@ testData <- data[-trainIndex, ]
 table(trainData$HeartDisease)
 table(testData$HeartDisease)
 
+# train logistic regression
 
-
-
+logistic_regression_model <- glm(HeartDisease ~ ., data = trainData, family = "binomial")
+summary(logistic_regression_model)
