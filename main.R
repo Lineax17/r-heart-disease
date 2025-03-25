@@ -11,3 +11,19 @@ data$ST_Slope <- as.factor(data$ST_Slope)
 data$HeartDisease <- as.factor(data$HeartDisease) #target
 
 summary(data)
+
+#Splitting data into test and train
+library(caret)
+
+set.seed(467)
+trainIndex <- createDataPartition(data$HeartDisease, p = 0.8, list = FALSE)
+
+trainData <- data[trainIndex, ]
+testData <- data[-trainIndex, ]
+
+table(trainData$HeartDisease)
+table(testData$HeartDisease)
+
+
+
+
