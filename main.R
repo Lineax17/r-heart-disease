@@ -13,6 +13,7 @@ data$HeartDisease <- as.factor(data$HeartDisease) #target
 summary(data)
 
 # splitting data into test and train
+
 library(caret)
 
 set.seed(467)
@@ -27,4 +28,19 @@ table(testData$HeartDisease)
 # train logistic regression
 
 logistic_regression_model <- glm(HeartDisease ~ ., data = trainData, family = "binomial")
+logistic_regression_probabilities <- predict(logistic_regression_model, newdata = testData, type="response")
+logistic_regression_prediction <- ifelse(logistic_regression_prediction > 0.5, 1, 0)
 summary(logistic_regression_model)
+
+# accuracy and error rate for logistic regression
+
+actual <- as.numeric(as.character(testData$HeartDisease))
+
+accuracy <- mean(logistic_regression_prediction == actual)
+cat("Accuracy:", round(accuracy, 4), "\n")
+
+confusion <- table(Predicted = logistic_regression_prediction, Actual = actual)
+print(confusion)
+
+mae <- mean(abs(logistic_regression_probabilities - actual))
+cat("Mean Absolute Error (MAE):", round(mae, 4), "\n")
