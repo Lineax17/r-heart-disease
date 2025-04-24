@@ -29,7 +29,7 @@ table(testData$HeartDisease)
 
 logistic_regression_model <- glm(HeartDisease ~ ., data = trainData, family = "binomial")
 logistic_regression_probabilities <- predict(logistic_regression_model, newdata = testData, type="response")
-logistic_regression_prediction <- ifelse(logistic_regression_prediction > 0.5, 1, 0)
+logistic_regression_prediction <- ifelse(logistic_regression_probabilities > 0.5, 1, 0)
 summary(logistic_regression_model)
 
 # accuracy and error rate for logistic regression
@@ -44,3 +44,15 @@ print(confusion)
 
 mae <- mean(abs(logistic_regression_probabilities - actual))
 cat("Mean Absolute Error (MAE):", round(mae, 4), "\n")
+
+# train decision tree
+
+library(rpart)
+dicision_tree_model <- rpart(HeartDisease ~ ., data=trainData, method="class")
+decision_tree_probabilities <- predict(radom_forest_model, newdata=testData)
+
+# train random forest
+
+library(randomForest)
+random_forest_model <- randomForest(HeartDisease ~ ., data=trainData)
+random_forest_prediction <- predict(radom_forest_model, newdata=testData)
