@@ -12,6 +12,9 @@ data$ST_Slope <- as.factor(data$ST_Slope)
 data$HeartDisease <- as.factor(data$HeartDisease) #target
 summary(data)
 
+# visualize data
+plot()
+
 # splitting data into test and train
 library(caret)
 set.seed(467)
@@ -30,8 +33,8 @@ summary(log_reg_model)
 # accuracy and error rate for logistic regression
 actual <- as.numeric(as.character(testData$HeartDisease))
 accuracy <- mean(log_reg_pred == actual)
-
 cat("Accuracy:", round(accuracy, 4), "\n")
+
 confusion <- table(Predicted = log_reg_pred, Actual = actual)
 print(confusion)
 
