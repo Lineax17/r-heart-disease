@@ -30,18 +30,29 @@ summary(logistic_regression_model)
 # accuracy and error rate for logistic regression
 actual <- as.numeric(as.character(testData$HeartDisease))
 accuracy <- mean(logistic_regression_prediction == actual)
+
 cat("Accuracy:", round(accuracy, 4), "\n")
 confusion <- table(Predicted = logistic_regression_prediction, Actual = actual)
 print(confusion)
+
 mae <- mean(abs(logistic_regression_probabilities - actual))
 cat("Mean Absolute Error (MAE):", round(mae, 4), "\n")
 
 # train decision tree
 library(rpart)
-dicision_tree_model <- rpart(HeartDisease ~ ., data=trainData, method="class")
-decision_tree_probabilities <- predict(radom_forest_model, newdata=testData)
+tree_model <- rpart(HeartDisease ~ ., data = trainData, method = "class")
+tree_pred <- predict(tree_model, newdata = testData, type = "class")
+tree_probs <- predict(tree_model, newdata = testData, type = "prob")[,2]
+summary(tree_model)
 
-# train random forest
-library(randomForest)
-random_forest_model <- randomForest(HeartDisease ~ ., data=trainData)
-random_forest_prediction <- predict(radom_forest_model, newdata=testData)
+# accuracy and error rate of decision tree
+actual <- as.numeric(as.character(testData$HeartDisease))
+
+tree_acc <- mean(tree_pred == actual)
+cat("Decision Tree Accuracy:", round(tree_acc, 4), "\n")
+
+cat("Decision Tree Confusion Matrix:\n")
+print(table(Predicted = tree_pred, Actual = actual))
+
+tree_mae <- mean(abs(tree_probs - actual))
+cat("Decision Tree MAE:", round(tree_mae, 4), "\n")
