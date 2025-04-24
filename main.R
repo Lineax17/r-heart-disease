@@ -12,8 +12,15 @@ data$ST_Slope <- as.factor(data$ST_Slope)
 data$HeartDisease <- as.factor(data$HeartDisease) #target
 summary(data)
 
-# visualize data
-plot()
+# visualize numeric data
+par(mfrow=c(1,2))
+boxplot(data$Age, main = "Age")
+boxplot(data$RestingBP, main = "RestingBP")
+
+par(mfrow=c(1,2))
+boxplot(data$Cholesterol, main = "Cholesterol")
+boxplot(data$MaxHR, main = "MaxHR")
+
 
 # splitting data into test and train
 library(caret)
