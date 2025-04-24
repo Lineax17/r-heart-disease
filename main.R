@@ -22,20 +22,20 @@ table(trainData$HeartDisease)
 table(testData$HeartDisease)
 
 # train logistic regression
-logistic_regression_model <- glm(HeartDisease ~ ., data = trainData, family = "binomial")
-logistic_regression_probabilities <- predict(logistic_regression_model, newdata = testData, type="response")
-logistic_regression_prediction <- ifelse(logistic_regression_probabilities > 0.5, 1, 0)
-summary(logistic_regression_model)
+log_reg_model <- glm(HeartDisease ~ ., data = trainData, family = "binomial")
+log_reg_prob <- predict(log_reg_model, newdata = testData, type="response")
+log_reg_pred <- ifelse(log_reg_prob > 0.5, 1, 0)
+summary(log_reg_model)
 
 # accuracy and error rate for logistic regression
 actual <- as.numeric(as.character(testData$HeartDisease))
-accuracy <- mean(logistic_regression_prediction == actual)
+accuracy <- mean(log_reg_pred == actual)
 
 cat("Accuracy:", round(accuracy, 4), "\n")
-confusion <- table(Predicted = logistic_regression_prediction, Actual = actual)
+confusion <- table(Predicted = log_reg_pred, Actual = actual)
 print(confusion)
 
-mae <- mean(abs(logistic_regression_probabilities - actual))
+mae <- mean(abs(log_reg_prob - actual))
 cat("Mean Absolute Error (MAE):", round(mae, 4), "\n")
 
 # train decision tree
