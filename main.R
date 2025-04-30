@@ -11,6 +11,7 @@ data$ExerciseAngina <- as.factor(data$ExerciseAngina)
 data$ST_Slope <- as.factor(data$ST_Slope)
 data$HeartDisease <- as.factor(data$HeartDisease) #target
 summary(data)
+plot(data)
 
 # visualize numeric data
 par(mfrow=c(1,2))
@@ -21,6 +22,13 @@ par(mfrow=c(1,2))
 boxplot(data$Cholesterol, main = "Cholesterol")
 boxplot(data$MaxHR, main = "MaxHR")
 
+par(mfrow=c(1,2))
+plot(data$HeartDisease, data$Age, ylab = "Age", xlab = "Disease")
+plot(data$HeartDisease, data$RestingBP, ylab = "RestingBP", xlab = "Disease")
+
+par(mfrow=c(1,2))
+plot(data$HeartDisease, data$Cholesterol, ylab = "Cholesterol", xlab = "Disease")
+plot(data$HeartDisease, data$MaxHR, ylab = "MaxHR", xlab = "Disease")
 
 # splitting data into test and train
 library(caret)
