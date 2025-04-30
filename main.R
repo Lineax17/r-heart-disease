@@ -51,6 +51,7 @@ accuracy <- mean(log_reg_pred == actual)
 cat("Accuracy:", round(accuracy, 4), "\n")
 
 confusion <- table(Predicted = log_reg_pred, Actual = actual)
+cat("Logistic Regression Confusion Matrix:\n")
 print(confusion)
 
 mae <- mean(abs(log_reg_prob - actual))
