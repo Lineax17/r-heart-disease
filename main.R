@@ -45,17 +45,9 @@ log_reg_prob <- predict(log_reg_model, newdata = testData, type="response")
 log_reg_pred <- ifelse(log_reg_prob > 0.5, 1, 0)
 summary(log_reg_model)
 
-# accuracy and error rate for logistic regression
-actual <- as.numeric(as.character(testData$HeartDisease))
-accuracy <- mean(log_reg_pred == actual)
-cat("Accuracy:", round(accuracy, 4), "\n")
-
 confusion <- table(Predicted = log_reg_pred, Actual = actual)
 cat("Logistic Regression Confusion Matrix:\n")
 print(confusion)
-
-mae <- mean(abs(log_reg_prob - actual))
-cat("Mean Absolute Error (MAE):", round(mae, 4), "\n")
 
 # train decision tree
 library(rpart)
@@ -64,14 +56,5 @@ tree_pred <- predict(tree_model, newdata = testData, type = "class")
 tree_probs <- predict(tree_model, newdata = testData, type = "prob")[,2]
 summary(tree_model)
 
-# accuracy and error rate of decision tree
-actual <- as.numeric(as.character(testData$HeartDisease))
-
-tree_acc <- mean(tree_pred == actual)
-cat("Decision Tree Accuracy:", round(tree_acc, 4), "\n")
-
 cat("Decision Tree Confusion Matrix:\n")
 print(table(Predicted = tree_pred, Actual = actual))
-
-tree_mae <- mean(abs(tree_probs - actual))
-cat("Decision Tree MAE:", round(tree_mae, 4), "\n")
