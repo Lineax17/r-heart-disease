@@ -155,3 +155,12 @@ print(table(Predicted = tree_pred, Actual = actual))
 #######################################
 # Random Forest
 #######################################
+
+library(randomForest)
+rf_model <- randomForest(HeartDisease ~ ., data = trainData, ntree = 100, importance = TRUE)
+rf_pred <- predict(rf_model, newdata = testData, type = "response")
+rf_probs <- predict(rf_model, newdata = testData, type = "prob")[,2]
+
+actual <- as.numeric(as.character(testData$HeartDisease))
+cat("Random Forest Confusion Matrix:\n")
+print(table(Predicted = rf_pred, Actual = actual))
