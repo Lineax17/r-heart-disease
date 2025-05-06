@@ -23,12 +23,12 @@ boxplot(data$Cholesterol, main = "Cholesterol")
 boxplot(data$MaxHR, main = "MaxHR")
 
 par(mfrow=c(1,2))
-plot(data$HeartDisease, data$Age, ylab = "Age", xlab = "Disease")
-plot(data$HeartDisease, data$RestingBP, ylab = "RestingBP", xlab = "Disease")
+boxplot(data$Age ~ data$HeartDisease, ylab = "Age", xlab = "Disease")
+boxplot(data$RestingBP ~ data$HeartDisease, ylab = "RestingBP", xlab = "Disease")
 
 par(mfrow=c(1,2))
-plot(data$HeartDisease, data$Cholesterol, ylab = "Cholesterol", xlab = "Disease")
-plot(data$HeartDisease, data$MaxHR, ylab = "MaxHR", xlab = "Disease")
+boxplot(data$Cholesterol ~ data$HeartDisease, ylab = "Cholesterol", xlab = "Disease")
+boxplot(data$MaxHR ~ data$HeartDisease, ylab = "MaxHR", xlab = "Disease")
 
 # splitting data into test and train
 library(caret)
@@ -43,7 +43,7 @@ table(testData$HeartDisease)
 log_reg_model <- glm(HeartDisease ~ ., data = trainData, family = "binomial")
 log_reg_prob <- predict(log_reg_model, newdata = testData, type="response")
 log_reg_pred <- ifelse(log_reg_prob > 0.5, 1, 0)
-summary(log_reg_model)
+# summary(log_reg_model)
 
 actual <- as.numeric(as.character(testData$HeartDisease))
 confusion <- table(Predicted = log_reg_pred, Actual = actual)
@@ -55,7 +55,7 @@ library(rpart)
 tree_model <- rpart(HeartDisease ~ ., data = trainData, method = "class")
 tree_pred <- predict(tree_model, newdata = testData, type = "class")
 tree_probs <- predict(tree_model, newdata = testData, type = "prob")[,2]
-summary(tree_model)
+# summary(tree_model)
 
 actual <- as.numeric(as.character(testData$HeartDisease))
 cat("Decision Tree Confusion Matrix:\n")
