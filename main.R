@@ -45,6 +45,7 @@ log_reg_prob <- predict(log_reg_model, newdata = testData, type="response")
 log_reg_pred <- ifelse(log_reg_prob > 0.5, 1, 0)
 summary(log_reg_model)
 
+actual <- as.numeric(as.character(testData$HeartDisease))
 confusion <- table(Predicted = log_reg_pred, Actual = actual)
 cat("Logistic Regression Confusion Matrix:\n")
 print(confusion)
@@ -56,5 +57,6 @@ tree_pred <- predict(tree_model, newdata = testData, type = "class")
 tree_probs <- predict(tree_model, newdata = testData, type = "prob")[,2]
 summary(tree_model)
 
+actual <- as.numeric(as.character(testData$HeartDisease))
 cat("Decision Tree Confusion Matrix:\n")
 print(table(Predicted = tree_pred, Actual = actual))
