@@ -14,7 +14,6 @@ data$ExerciseAngina <- as.factor(data$ExerciseAngina)
 data$ST_Slope <- as.factor(data$ST_Slope)
 data$HeartDisease <- as.factor(data$HeartDisease) #target
 summary(data)
-plot(data)
 
 # rename to valid variable names
 data$HeartDisease <- factor(data$HeartDisease,
