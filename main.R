@@ -16,6 +16,11 @@ data$HeartDisease <- as.factor(data$HeartDisease) #target
 summary(data)
 plot(data)
 
+# rename to valid variable names
+data$HeartDisease <- factor(data$HeartDisease,
+                           levels = c(0, 1),
+                           labels = c("No", "Yes"))
+
 #######################################
 # Visulization
 #######################################
@@ -118,49 +123,68 @@ barplot(t(prop),
 
 library(caret)
 set.seed(467)
-trainIndex <- createDataPartition(data$HeartDisease, p = 0.8, list = FALSE)
+trainIndex <- createDataPartition(data$HeartDisease, p = 0.7, list = FALSE)
 trainData <- data[trainIndex, ]
 testData <- data[-trainIndex, ]
 table(trainData$HeartDisease)
 table(testData$HeartDisease)
 
+# Define cross-validation control
+control <- trainControl(
+  method = "cv",          # Cross-Validation
+  number = 10,            # 10 folds
+  savePredictions = "all",
+  classProbs = TRUE       # Calculate class probabilities
+)
+
 #######################################
 # Logistic Regression
 #######################################
 
-log_reg_model <- glm(HeartDisease ~ ., data = trainData, family = "binomial")
-log_reg_prob <- predict(log_reg_model, newdata = testData, type="response")
-log_reg_pred <- ifelse(log_reg_prob > 0.5, 1, 0)
-# summary(log_reg_model)
+log_reg_model <- train(
+  HeartDisease ~ .,
+  data = trainData,
+  method = "glm",
+  family = "binomial",
+  trControl = control
+)
 
-actual <- as.numeric(as.character(testData$HeartDisease))
-confusion <- table(Predicted = log_reg_pred, Actual = actual)
-cat("Logistic Regression Confusion Matrix:\n")
-print(confusion)
+# prediction and confusion matrix
+log_reg_pred <- predict(log_reg_model, newdata = testData)
+log_reg_cm <- confusionMatrix(log_reg_pred, testData$HeartDisease)
+print(log_reg_cm)
 
 #######################################
 # Decision Tree
 #######################################
 
 library(rpart)
-tree_model <- rpart(HeartDisease ~ ., data = trainData, method = "class")
-tree_pred <- predict(tree_model, newdata = testData, type = "class")
-tree_probs <- predict(tree_model, newdata = testData, type = "prob")[,2]
-# summary(tree_model)
+tree_model <- train(
+  HeartDisease ~ .,
+  data = trainData,
+  method = "rpart",
+  trControl = control
+)
 
-actual <- as.numeric(as.character(testData$HeartDisease))
-cat("Decision Tree Confusion Matrix:\n")
-print(table(Predicted = tree_pred, Actual = actual))
+# prediction and confusion matrix
+tree_pred <- predict(tree_model, newdata = testData)
+tree_cm <- confusionMatrix(tree_pred, testData$HeartDisease)
+print(tree_cm)
 
 #######################################
 # Random Forest
 #######################################
 
 library(randomForest)
-rf_model <- randomForest(HeartDisease ~ ., data = trainData, ntree = 100, importance = TRUE)
-rf_pred <- predict(rf_model, newdata = testData, type = "response")
-rf_probs <- predict(rf_model, newdata = testData, type = "prob")[,2]
+rf_model <- train(
+  HeartDisease ~ .,
+  data = trainData,
+  method = "rf",
+  trControl = control,
+  importance = TRUE
+)
 
-actual <- as.numeric(as.character(testData$HeartDisease))
-cat("Random Forest Confusion Matrix:\n")
-print(table(Predicted = rf_pred, Actual = actual))
+# prediction and confusion matrix
+rf_pred <- predict(rf_model, newdata = testData)
+rf_cm <- confusionMatrix(rf_pred, testData$HeartDisease)
+print(rf_cm)
