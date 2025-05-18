@@ -2,7 +2,7 @@
 # Read data & Set correct types
 #######################################
 
-data <- read.csv("./data/heart.csv",header=TRUE,sep=",",fill=TRUE,stringsAsFactors=TRUE)
+data <- read.csv("./data/heart.csv", header = TRUE, sep = ",", fill = TRUE, stringsAsFactors = TRUE)
 head(data)
 
 # set nominal columns as factor
@@ -17,19 +17,19 @@ summary(data)
 
 # rename to valid variable names
 data$HeartDisease <- factor(data$HeartDisease,
-                           levels = c(0, 1),
-                           labels = c("No", "Yes"))
+                            levels = c(0, 1),
+                            labels = c("No", "Yes"))
 
 #######################################
 # Visulization
 #######################################
 
 # visualize numeric data
-par(mfrow=c(1,2))
+par(mfrow = c(1, 2))
 boxplot(data$Age, main = "Age")
 boxplot(data$RestingBP, main = "RestingBP")
 
-par(mfrow=c(1,2))
+par(mfrow = c(1, 2))
 boxplot(data$Cholesterol, main = "Cholesterol")
 boxplot(data$MaxHR, main = "MaxHR")
 
@@ -39,7 +39,7 @@ boxplot(data$RestingBP ~ data$HeartDisease, ylab = "RestingBP", xlab = "Disease"
 boxplot(data$Cholesterol ~ data$HeartDisease, ylab = "Cholesterol", xlab = "Disease")
 boxplot(data$MaxHR ~ data$HeartDisease, ylab = "MaxHR", xlab = "Disease")
 
-boxplot(data$Oldpeak ~ data$HeartDisease, ylab="Oldpeak", xlab = "Disease")
+boxplot(data$Oldpeak ~ data$HeartDisease, ylab = "Oldpeak", xlab = "Disease")
 
 # visualize factorial data
 tab <- table(data$Sex, data$HeartDisease)
@@ -51,8 +51,8 @@ barplot(t(prop),
         main = "Disease by Gender",
         xlab = "Gender",
         ylab = "",
-        ylim = c(0,1),
-        col  = c("darkgreen", "red"))
+        ylim = c(0, 1),
+        col = c("darkgreen", "red"))
 
 tab <- table(data$ChestPainType, data$HeartDisease)
 prop <- prop.table(tab, margin = 1)
@@ -63,7 +63,7 @@ barplot(t(prop),
         main = "Disease by ChestPainType",
         xlab = "ChestPainType",
         ylab = "",
-        ylim = c(0,1),
+        ylim = c(0, 1),
         col = c("darkgreen", "red"))
 
 tab <- table(data$FastingBS, data$HeartDisease)
@@ -75,7 +75,7 @@ barplot(t(prop),
         main = "Disease by FastingBS",
         xlab = "FastingBS",
         ylab = "",
-        ylim = c(0,1),
+        ylim = c(0, 1),
         col = c("darkgreen", "red"),
         names.arg = c("no", "yes"))
 
@@ -88,7 +88,7 @@ barplot(t(prop),
         main = "Disease by RestingECG",
         xlab = "RestingECG",
         ylab = "",
-        ylim = c(0,1),
+        ylim = c(0, 1),
         col = c("darkgreen", "red"))
 
 tab <- table(data$ExerciseAngina, data$HeartDisease)
@@ -100,7 +100,7 @@ barplot(t(prop),
         main = "Disease by ExerciseAngina",
         xlab = "ExerciseAngina",
         ylab = "",
-        ylim = c(0,1),
+        ylim = c(0, 1),
         col = c("darkgreen", "red"))
 
 
@@ -113,7 +113,7 @@ barplot(t(prop),
         main = "Disease by ST_Slope",
         xlab = "ST_Slope",
         ylab = "",
-        ylim = c(0,1),
+        ylim = c(0, 1),
         col = c("darkgreen", "red"))
 
 #######################################
@@ -123,8 +123,8 @@ barplot(t(prop),
 library(caret)
 set.seed(467)
 trainIndex <- createDataPartition(data$HeartDisease, p = 0.7, list = FALSE)
-trainData <- data[trainIndex, ]
-testData <- data[-trainIndex, ]
+trainData <- data[trainIndex,]
+testData <- data[-trainIndex,]
 table(trainData$HeartDisease)
 table(testData$HeartDisease)
 
@@ -170,6 +170,11 @@ tree_pred <- predict(tree_model, newdata = testData)
 tree_cm <- confusionMatrix(tree_pred, testData$HeartDisease)
 print(tree_cm)
 
+#visualization of decision tree
+par(mfrow = c(1, 1))
+library(rpart.plot)
+rpart.plot(tree_model$finalModel, box.palette = "Blues", main = "Decision Tree with all features")
+
 #######################################
 # Random Forest
 #######################################
@@ -187,3 +192,8 @@ rf_model <- train(
 rf_pred <- predict(rf_model, newdata = testData)
 rf_cm <- confusionMatrix(rf_pred, testData$HeartDisease)
 print(rf_cm)
+
+# variable importance visualization
+varImpPlot(rf_model$finalModel,
+           sort = TRUE,
+           main = "Variable Importance RandomForest")
