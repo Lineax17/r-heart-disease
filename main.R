@@ -1,6 +1,7 @@
 #######################################
 # Read data & Set correct types
 #######################################
+set.seed(467)
 
 data <- read.csv("./data/heart.csv", header = TRUE, sep = ",", fill = TRUE, stringsAsFactors = TRUE)
 head(data)
