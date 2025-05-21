@@ -142,7 +142,8 @@ control <- trainControl(
   method = "cv",          # Cross-Validation
   number = 10,            # 10 folds
   savePredictions = "all",
-  classProbs = TRUE       # Calculate class probabilities
+  classProbs = TRUE,       # Calculate class probabilities
+  seeds = set.seed(467)
 )
 
 #######################################
