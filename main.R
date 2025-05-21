@@ -24,6 +24,9 @@ data$HeartDisease <- factor(data$HeartDisease,
 #cholesterol_median <- median(data$Cholesterol[data$Cholesterol > 0], na.rm = TRUE)
 #data$Cholesterol[data$Cholesterol == 0] <- cholesterol_median
 
+# remove data$Cholesterol completely
+#data <- data[, !names(data) %in% "Cholesterol"]
+
 # remove data$Cholesterol 0 rows
 data <- data[data$Cholesterol > 0, ]
 
@@ -139,10 +142,10 @@ table(testData$HeartDisease)
 
 # Define cross-validation control
 control <- trainControl(
-  method = "cv",          # Cross-Validation
-  number = 10,            # 10 folds
+  method = "cv",                # Cross-Validation
+  number = 10,                  # 10 folds
   savePredictions = "all",
-  classProbs = TRUE,       # Calculate class probabilities
+  classProbs = TRUE,            # Calculate class probabilities
   seeds = set.seed(467)
 )
 
