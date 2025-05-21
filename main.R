@@ -13,12 +13,20 @@ data$RestingECG <- as.factor(data$RestingECG)
 data$ExerciseAngina <- as.factor(data$ExerciseAngina)
 data$ST_Slope <- as.factor(data$ST_Slope)
 data$HeartDisease <- as.factor(data$HeartDisease) #target
-summary(data)
 
 # rename to valid variable names
 data$HeartDisease <- factor(data$HeartDisease,
                             levels = c(0, 1),
                             labels = c("No", "Yes"))
+
+# replace data$Cholesterol 0 with median
+#cholesterol_median <- median(data$Cholesterol[data$Cholesterol > 0], na.rm = TRUE)
+#data$Cholesterol[data$Cholesterol == 0] <- cholesterol_median
+
+# remove data$Cholesterol 0 rows
+data <- data[data$Cholesterol > 0, ]
+
+summary(data)
 
 #######################################
 # Visulization
@@ -170,7 +178,7 @@ tree_pred <- predict(tree_model, newdata = testData)
 tree_cm <- confusionMatrix(tree_pred, testData$HeartDisease)
 print(tree_cm)
 
-#visualization of decision tree
+# visualization of decision tree
 par(mfrow = c(1, 1))
 library(rpart.plot)
 rpart.plot(tree_model$finalModel, box.palette = "Blues", main = "Decision Tree with all features")
