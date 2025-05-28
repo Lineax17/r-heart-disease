@@ -129,7 +129,7 @@ barplot(t(prop),
         col = c("darkgreen", "red"))
 
 # remove data$Sex
-data <- data[, !names(data) %in% "Sex"]
+data <- subset(data, select = -c(Sex, Cholesterol))
 summary(data)
 
 #######################################
