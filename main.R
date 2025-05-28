@@ -128,6 +128,10 @@ barplot(t(prop),
         ylim = c(0, 1),
         col = c("darkgreen", "red"))
 
+# remove data$Sex
+data <- data[, !names(data) %in% "Sex"]
+summary(data)
+
 #######################################
 # Split in training and test data
 #######################################
@@ -186,7 +190,7 @@ print(tree_cm)
 # visualization of decision tree
 par(mfrow = c(1, 1))
 library(rpart.plot)
-rpart.plot(tree_model$finalModel, box.palette = "Blues", main = "Decision Tree with all features")
+rpart.plot(tree_model$finalModel, box.palette = "Blues", main = "Decision Tree for Heart Disease")
 
 #######################################
 # Random Forest
