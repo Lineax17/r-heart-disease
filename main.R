@@ -165,6 +165,8 @@ log_reg_model <- train(
   trControl = control
 )
 
+summary(log_reg_model)
+
 # prediction and confusion matrix
 log_reg_pred <- predict(log_reg_model, newdata = testData)
 log_reg_cm <- confusionMatrix(log_reg_pred, testData$HeartDisease)
