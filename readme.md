@@ -31,6 +31,21 @@ models at predicting heart failure based on these features.
 | `ST_Slope`       | Slope of the peak exercise ST segment: <br>• `Up` = Upsloping <br>• `Flat` = Flat <br>• `Down` = Downsloping.                                |
 | `HeartDisease`   | Target variable: `1` = Presence of heart disease, `0` = Absence of heart disease.                                                            |
 
+## Feature Plots
+
+### Numeric Variables
+<img width="393" height="391" alt="num_1" src="https://github.com/user-attachments/assets/4318d5d5-7866-460a-a95b-e909a7067f97" />
+<img width="393" height="394" alt="num_2" src="https://github.com/user-attachments/assets/923a8fca-fd8f-4537-a6e6-f5b0e2d22417" />
+<img width="367" height="370" alt="num_3" src="https://github.com/user-attachments/assets/fe8802fd-2718-436f-9593-43eed8d76234" />
+<img width="364" height="364" alt="num_4" src="https://github.com/user-attachments/assets/0259c681-2d2f-43f4-94e1-eab01ca67207" />
+<img width="192" height="370" alt="num_5" src="https://github.com/user-attachments/assets/21b9d9f1-dc01-45d0-8b38-63e880b586d3" />
+
+### Categorial Variables
+<img width="401" height="401" alt="cat_1" src="https://github.com/user-attachments/assets/b779325f-bdee-4c13-ae2d-023174a64afe" />
+<img width="401" height="401" alt="cat_2" src="https://github.com/user-attachments/assets/b5a6f4a2-20c1-45a2-91a3-85fb86eb0e70" />
+<img width="250" height="508" alt="cat_3" src="https://github.com/user-attachments/assets/befa8853-5929-4312-919d-54be1800d8c1" />
+<img width="260" height="508" alt="cat_4" src="https://github.com/user-attachments/assets/84d59534-8cb2-46e8-96d1-85f5fd490daf" />
+
 ## Data Cleaning
 
 - **Feature exclusion:**  
