@@ -29,3 +29,70 @@ models at predicting heart failure based on these features.
 | `Oldpeak`            | ST depression induced by exercise relative to rest. Indicates possible myocardial ischemia.                                                              |
 | `ST_Slope`           | Slope of the peak exercise ST segment: <br>• `Up` = Upsloping <br>• `Flat` = Flat <br>• `Down` = Downsloping.                                             |
 | `HeartDisease`       | Target variable: `1` = Presence of heart disease, `0` = Absence of heart disease.                                                                        |
+
+## Data Cleaning
+
+- **Feature exclusion:**  
+  The `Sex` feature was removed because its distribution was skewed and not representative.
+
+- **Missing / invalid values:**  
+  About 20% of cholesterol values are recorded as `0`, which is biologically impossible.  
+  → Solution: rows with `cholesterol = 0` were removed since these cases were mostly labeled as “diseased” and would bias the model.
+
+---
+
+## Modeling
+
+**Applied models:**
+1. Logistic Regression  
+2. Decision Tree  
+3. Random Forest  
+
+**Validation method:**  
+10-fold cross-validation was performed to ensure model robustness.
+
+---
+
+## Dimensionality Reduction
+
+Based on the **Mean Decrease Accuracy** from the Random Forest model, the following features were excluded:
+
+- `Cholesterol`
+- `FastingBS`
+
+**Result:**  
+Excluding these features had little to no impact on model performance, so they were safely removed.
+
+---
+
+## Results and Interpretation
+
+### Most influential features:
+- **ST_Slope**
+- **Oldpeak**
+- **ExerciseAngina**
+- **ChestPainType**
+
+These are medically meaningful:
+- Changes in **ST_Slope** and **Oldpeak** indicate **ischemic changes** in the heart.  
+- **ExerciseAngina** and **ChestPainType** are direct indicators of coronary insufficiency.
+
+**Cholesterol**, although generally relevant to heart disease, lost its predictive power here due to faulty data (values = 0).
+
+---
+
+## Model Selection
+
+Since **false negatives** (predicting a sick patient as healthy) are more critical than false positives, the best model was chosen based on **minimizing false negatives**.
+
+➡️ **Best model:** **Decision Tree**
+
+---
+
+## Improvement Suggestions
+
+- Collect **more laboratory data** (e.g., lipid profiles, inflammation markers) to improve prediction quality.  
+- Improve **data quality control** to prevent biologically impossible entries.  
+- Consider testing **advanced models** such as Gradient Boosting or Neural Networks for further optimization.
+
+---
