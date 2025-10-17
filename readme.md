@@ -61,19 +61,19 @@ models at predicting heart failure based on these features.
 
 **Confusion Matrix:**
 
-|                 | **Predicted: No** | **Predicted: Yes** |
-| --------------- | ----------------- | ------------------ |
-| **Actual: No**  | 103               | 14                 |
-| **Actual: Yes** | 14                | 92                 |
+|                 | **Actual: No** | **Actual: Yes** |
+| --------------- | ---------------| ----------------|
+| **Predicted: No**  | 103         | 14              |
+| **Predicted: Yes** | 14          | 92              |
 
 ### Decision Tree
 
 **Confusion Matrix:**
 
-|                 | **Predicted: No** | **Predicted: Yes** |
-| --------------- | ----------------- | ------------------ |
-| **Actual: No**  | 89                | 11                 |
-| **Actual: Yes** | 28                | 95                 |
+|                    | **Actual: No** | **Actual: Yes** |
+| ------------------ | -------------- | --------------- |
+| **Predicted: No**  | 89          | 11              |
+| **Predicted: Yes** | 28          | 95              |
 
 <img width="1686" height="1678" alt="Decision_Tree_Diagram" src="https://github.com/user-attachments/assets/373cd6ae-a0bc-4184-b1a1-1ff4e2c52d4c" />
 
@@ -81,10 +81,10 @@ models at predicting heart failure based on these features.
 
 **Confusion Matrix:**
 
-|                 | **Predicted: No** | **Predicted: Yes** |
-| --------------- | ----------------- | ------------------ |
-| **Actual: No**  | 101               | 16                 |
-| **Actual: Yes** | 16                | 90                 |
+|                    | **Actual: No** | **Actual: Yes** |
+| ------------------ | -------------- | --------------- |
+| **Predicted: No**  | 101         | 16              |
+| **Predicted: Yes** | 16          | 90              |
 
 <img width="1688" height="1686" alt="Random_Forest_Diagram" src="https://github.com/user-attachments/assets/3f5976cc-3137-47d0-82ab-fc9c71155212" />
 
@@ -102,28 +102,28 @@ Excluding these features had little to no impact on model performance, so they w
 
 **Confusion Matrix:**
 
-|                 | **Predicted: No** | **Predicted: Yes** |
-| --------------- | ----------------- | ------------------ |
-| **Actual: No**  | 103               | 15                 |
-| **Actual: Yes** | 14                | 91                 |
+|                    | **Actual: No** | **Actual: Yes** |
+| ------------------ | -------------- | --------------- |
+| **Predicted: No**  | 103            | 15              |
+| **Predicted: Yes** | 14             | 91              |
 
 ### Decision Tree (After Feature Reduction)
 
 **Confusion Matrix:**
 
-|                 | **Predicted: No** | **Predicted: Yes** |
-| --------------- | ----------------- | ------------------ |
-| **Actual: No**  | 89                | 11                 |
-| **Actual: Yes** | 28                | 95                 |
+|                    | **Actual: No** | **Actual: Yes** |
+| ------------------ | -------------- | --------------- |
+| **Predicted: No**  | 89             | 11              |
+| **Predicted: Yes** | 28             | 95              |
 
 ### Random Forest (After Feature Reduction)
 
 **Confusion Matrix:**
 
-|                 | **Predicted: No** | **Predicted: Yes** |
-| --------------- | ----------------- | ------------------ |
-| **Actual: No**  | 100               | 15                 |
-| **Actual: Yes** | 17                | 91                 |
+|                    | **Actual: No** | **Actual: Yes** |
+| ------------------ | -------------- | --------------- |
+| **Predicted: No**  | 100            | 15              |
+| **Predicted: Yes** | 17             | 91              |
 
 ---
 
