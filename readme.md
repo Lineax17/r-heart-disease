@@ -75,6 +75,8 @@ models at predicting heart failure based on these features.
 | **Actual: No**  | 89                | 11                 |
 | **Actual: Yes** | 28                | 95                 |
 
+<img width="1686" height="1678" alt="Decision_Tree_Diagram" src="https://github.com/user-attachments/assets/373cd6ae-a0bc-4184-b1a1-1ff4e2c52d4c" />
+
 ### Random Forest
 
 **Confusion Matrix:**
@@ -83,6 +85,8 @@ models at predicting heart failure based on these features.
 | --------------- | ----------------- | ------------------ |
 | **Actual: No**  | 101               | 16                 |
 | **Actual: Yes** | 16                | 90                 |
+
+<img width="1688" height="1686" alt="Random_Forest_Diagram" src="https://github.com/user-attachments/assets/3f5976cc-3137-47d0-82ab-fc9c71155212" />
 
 ## Dimensionality Reduction
 
